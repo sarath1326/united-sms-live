@@ -1,37 +1,49 @@
 
 
-import { DBconnecting } from "@/DBconfig/Dbconn";
-import userSchema from "@/Model/userModel";
+
+import { DB } from "@/Helpers/db"
 import { NextRequest, NextResponse } from "next/server"
-
-
-DBconnecting();
-
+import bcrypt from "bcrypt";
 
 
 
-export async function POST(req: NextRequest) {
-
+export async function POST(req: NextRequest) {  // signup post req
 
     try {
 
         const data = await req.json()
 
-        console.log(data)
+        const finduser = await DB.users.findUnique({  // check this user already crete a account
 
-        const finla =new userSchema(data)
+            where: { email: data.email }
+        })
 
-          finla.save()
-         
-           return NextResponse.json({msg:"signup ok"})
-       
+        if (!finduser) {
 
+            data.password = await bcrypt.hash(data.password, 10);
 
-    } catch (error: any) {
+            await DB.users.create({  // create new user
+                
+                data:data
+           
+             })           
+               console.log("user careted")
+             return NextResponse.json({flag:true})
 
-        return NextResponse.json({ err: true })
+        } else {
+
+             console.log("user exit")
+            return NextResponse.json({ userexit: true })
+        }
+
+    } catch (error) {
+
+      console.log("catech err", error)
+        return NextResponse.json({ flag: false })
 
     }
+
+
 
 
 }

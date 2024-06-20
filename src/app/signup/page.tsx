@@ -5,42 +5,76 @@
 import React from "react";
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-
+import Navebar from "../Navebar";
+import { ThreeDots } from 'react-loader-spinner'
+import { useFormik } from 'formik';
+import { validationSchema } from "./Schema"
 import axios from "axios"
-import { toast } from "react-hot-toast"
+import {message} from "antd"
+
 
 function page() {
 
-  const [input, setinput] = useState({
+ 
+  const [loding, setloding] = useState(false)
+
+  const router = useRouter()
+
+
+  type inputvalue_type = {
+
+    name: string
+    email: string
+    password: string
+  }
+
+  const initalValues: inputvalue_type = {
 
     name: "",
     email: "",
     password: ""
-    
 
-  })
-
-  const router=useRouter()
-
-
-  const onSubmit = async () => {
-
-    try {
-
-      axios.post('/api/users/signup', input).then((respo: any) => {
-
-        console.log(respo.data.msg)
-        router.push("/login")
-
-      })
-
-    } catch (error) {
-
-      console.log("server err")
-
-    }
   }
 
+
+
+  const { errors, values, handleChange, handleSubmit, handleBlur, touched } = useFormik({
+
+    initialValues: initalValues,
+    validationSchema: validationSchema,
+
+    onSubmit: (value) => {
+
+          setloding(true)
+          
+          axios.post("/api/users/signup",values).then((repo:any)=>{
+
+                    const result=repo.data;
+
+                    if(result.flag){
+
+                        router.push("/login")
+                        setloding(false)
+                   
+                        }else if(result.userexit){
+
+                          message.error("this email id already used")
+                          setloding(false)
+                    }else{
+
+                          message.error("server error")
+                          setloding(false)
+                    }
+          }).catch(err=>{
+
+               message.error("Network error")
+               setloding(false)
+          })
+
+    }
+
+
+  })
 
 
 
@@ -49,37 +83,136 @@ function page() {
   return (
     <div>
 
-      <div className="w-full h-screen bg-black pt-[100px] " >
+      <div className="w-full h-screen bg-[#16161d] pt-10  " >
 
-        <h1 className="text-orange-500 text-center text-[25px] " > Signup  </h1>
+        <Navebar />
+
+        <h1 className=" text-white text-center text-[25px] " > Signup  </h1>
+
 
         <div className="w-full flex justify-center mt-[70px]  " >
 
           <div className=""   >
 
-            <label htmlFor="" className="text-white" > Full Name </label><br />
-            <input className="w-[300px] rounded-sm h-[35px] text-black mb-5" type="text" placeholder="your name"
-              onChange={(e) => setinput({ ...input, name: e.target.value })}
+            <form action="" onSubmit={handleSubmit} >
+
+              <label htmlFor="" className="text-white" > Full Name </label><br />
+              
+              <input className="w-[300px] rounded-sm h-[35px] text-black " type="text" placeholder="your name"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+
+              /><br/>
+
+              {
+
+                errors.name && touched.name
+                  ?
+
+                  <>  <span className="text-red-500" > {errors.name} </span> <br/>
+                  </>
+                  : <br/>
 
 
 
-            /><br />
 
-            <label htmlFor="" className="text-white"> Email id </label><br />
-            <input className="w-[300px] rounded-sm h-[35px] mb-5" type="text" placeholder="your email id"
-              onChange={(e) => setinput({ ...input, email: e.target.value })}
+              }
 
-            /><br />
+              <label htmlFor="" className="text-white"> Email id </label><br />
+              <input className="w-[300px] rounded-sm h-[35px] " type="text" placeholder="your email id"
+               name="email"
+               value={values.email}
+               onChange={handleChange}
+               onBlur={handleBlur}
 
-            <label htmlFor="" className="text-white" > password </label><br />
-            <input className="w-[300px] rounded-sm h-[35px]" type="text" placeholder="password"
-              onChange={(e) => setinput({ ...input, password: e.target.value })}
+              /><br/>
+
+              {
+
+                errors.email && touched.email
+                  ?
+
+                  <>  <span className="text-red-500" > {errors.email} </span> <br />
+                  </>
+                  : <br/>
 
 
-            /><br />
+
+              }
 
 
-            <button onClick={onSubmit} className="w-[100px] h-[30px] bg-blue-500 rounded-md text-black mt-5 ml-24 " > Signup </button>
+
+              <label htmlFor="" className="text-white" > password </label><br />
+              <input className="w-[300px] rounded-sm h-[35px]" type="text" placeholder="password"
+               name="password"
+               value={values.password}
+               onChange={handleChange}
+               onBlur={handleBlur}
+
+
+              /><br />
+
+              {
+
+                errors.password && touched.password
+                  ?
+
+                  <>  <span className="text-red-500" > {errors.password} </span> <br />
+                  </>
+                  : <br/>
+
+
+
+              }
+
+
+              <button type="submit" className="w-[100px] h-[30px]  bg-blue-500 rounded-md text-black mt-5 ml-24 " >
+
+                {
+                  loding ?
+
+                    <div className="ml-9">
+
+                      <ThreeDots
+                        visible={true}
+                        height="30"
+                        width="30"
+                        color="#16161d"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+
+                      />
+
+
+                    </div>
+
+
+                    :
+                    "Signup"
+                }
+
+              </button>
+
+              <h1 onClick={()=>{router.push("/login")}} className="text-blue-800 text-center cursor-pointer mt-3" > i have already account </h1>
+
+              
+
+
+
+
+
+
+            </form>
+
+
+
+
+
+
 
           </div>
 
