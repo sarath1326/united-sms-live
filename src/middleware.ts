@@ -9,23 +9,46 @@ import { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
 
-
+      const path= request.nextUrl.pathname
     const token = request.cookies.get("DSMtoken")?.value || null
 
-    console.log(token)
+    if(path==="/viewpart"){
 
-    if(token){
+        if(token){
 
-          console.log("is token")
-          return NextResponse.redirect(new URL('/addpart', request.nextUrl))
-    
-        }else{
+            console.log("is token")
+            return NextResponse.redirect(new URL('/viewparts', request.nextUrl))
+      
+          }else{
+  
+            console.log("no token")
+  
+            return NextResponse.redirect(new URL('/login', request.nextUrl))
+      }
 
-          console.log("no token")
+        
+         
+    }else{
 
-          return NextResponse.redirect(new URL('/login', request.nextUrl))
+        if(token){
+
+            console.log("is token")
+            return NextResponse.redirect(new URL('/addpart', request.nextUrl))
+      
+          }else{
+  
+            console.log("no token")
+  
+            return NextResponse.redirect(new URL('/login', request.nextUrl))
+      }
+  
+
+
     }
 
+  
+
+   
 
 
 }
@@ -37,7 +60,8 @@ export function middleware(request: NextRequest) {
 export const config = {
     matcher: [
 
-        '/addparts'
+        '/addparts',
+        "/viewpart"
 
 
     ],

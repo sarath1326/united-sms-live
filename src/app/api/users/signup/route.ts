@@ -22,6 +22,8 @@ export async function POST(req: NextRequest) {  // signup post req
 
             data.password = await bcrypt.hash(data.password, 10);
 
+            
+
             await DB.users.create({  // create new user
                 
                 data:data

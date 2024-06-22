@@ -59,8 +59,8 @@ function Navebar() {
 
                 <div className='w-[50%] h-[100%]  pl-5' >
 
-                    <span className=' text-[25px] text-[#00C0FF]' > United Service  </span>
-                    <span className=' text-[25px] text-[#FF204E] ml-5' > DSM </span>
+                    {/* <span className=' text-[25px] text-[#00C0FF]' > United  Service  </span> */}
+                    <span className=' text-[25px] text-[#FF204E] ml-5' > SMS </span>
 
                     <span onClick={()=>{router.push("/")}} className='text-[15px] text-white ml-10 cursor-pointer' > Home  </span>
 
@@ -84,7 +84,7 @@ function Navebar() {
 
                             :
 
-                            <button onClick={() => { router.push("/signup") }} className='w-[80px] h-[35px] bg-white rounded-md text-black' >
+                            <button onClick={() => { router.push("/login") }} className='w-[80px] h-[35px] bg-white rounded-md text-black' >
 
                                Login
 
