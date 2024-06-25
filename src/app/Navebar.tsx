@@ -59,10 +59,10 @@ function Navebar() {
 
                 <div className='w-[50%] h-[100%]  pl-5' >
 
-                    {/* <span className=' text-[25px] text-[#00C0FF]' > United  Service  </span> */}
+                    <span className=' text-[25px] text-blue-700' > United  Service  </span>
                     <span className=' text-[25px] text-[#FF204E] ml-5' > SMS </span>
 
-                    <span onClick={()=>{router.push("/")}} className='text-[15px] text-white ml-10 cursor-pointer' > Home  </span>
+                    <span onClick={()=>{router.push("/")}} className='text-[15px] font-bold text-black  ml-10 cursor-pointer' > Home  </span>
 
 
                 </div>
@@ -70,13 +70,13 @@ function Navebar() {
                 <div className='w-[50%] h-[100%] flex justify-end pr-10 gap-5' >
 
 
-                    <h1 className=' text-white'> {name}   </h1>
+                    <h1 className=' text-[#FF204E]'> {name}   </h1>
 
                     {
 
                         flag ?
 
-                            <button onClick={() => { router.push("/login") }} className='w-[80px] h-[35px] bg-white rounded-md text-black' >
+                            <button onClick={() => { router.push("/login") }} className='w-[80px] h-[35px] hover:bg-blue-400 hover:text-white bg-white border-2 border-black rounded-md text-black' >
 
                                 Logout
 
@@ -84,7 +84,7 @@ function Navebar() {
 
                             :
 
-                            <button onClick={() => { router.push("/login") }} className='w-[80px] h-[35px] bg-white rounded-md text-black' >
+                            <button onClick={() => { router.push("/login") }} className='w-[80px] h-[35px] bg-white hover:bg-blue-400 hover:text-white bg-white border-2 border-black rounded-md text-black' >
 
                                Login
 
@@ -101,6 +101,9 @@ function Navebar() {
 
             </div>
 
+           <div className='w-full h-[1px] bg-black' >
+
+           </div>
 
 
 

@@ -16,6 +16,7 @@ model Users {
 }
 
 model Spares {
+  
   id             Int     @id @default(autoincrement())
   partname       String
   partcode       String
@@ -24,5 +25,10 @@ model Spares {
   warrantystatus String
   company        String
   partsent       Boolean @default(false)
+  partsentdate   String  @default("null")
   recevingdate   String
+  owcharge       String @default("null")
+  owstatus       Boolean @default(false) 
+  owpaid         Boolean @default(false)  
+
 }

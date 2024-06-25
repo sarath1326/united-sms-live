@@ -14,6 +14,18 @@ import { useState } from 'react';
 function page() {
 
     const [loding, setloding] = useState(false)
+    const [ow, setow] = useState(false)
+    const [company, setcompany] = useState([
+
+        "lloyd",
+        "carrier",
+        "akiva",
+        "amstard",
+        "onida",
+        "formanty",
+        "midea",
+
+    ])
 
     type inputvalue_type = {
 
@@ -23,6 +35,7 @@ function page() {
         customernumber: string
         warrantystatus: string
         company: string
+        owcharge: string
 
 
     }
@@ -34,7 +47,8 @@ function page() {
         customername: "",
         customernumber: "",
         warrantystatus: "",
-        company: ""
+        company: "",
+        owcharge: ""
 
     }
 
@@ -46,9 +60,18 @@ function page() {
 
         onSubmit: (value, { resetForm }) => {
 
-            setloding(true)
+           if(value. owcharge.length===0){
 
-            axios.post("/api/part/addpart", value).then((respo) => {
+            const sentdata={
+
+                value,
+                flag:false
+          }
+
+
+           setloding(true)
+
+            axios.post("/api/part/addpart", sentdata).then((respo) => {
 
                 const result = respo.data
 
@@ -72,10 +95,69 @@ function page() {
                 resetForm();
                 setloding(false)
             })
+          
+          
+            }else{
+
+                 const sentdata={
+
+                       value,
+                       flag:true
+                 }
+
+
+                  setloding(true)
+
+            axios.post("/api/part/addpart", sentdata).then((respo) => {
+
+                const result = respo.data
+
+                if (result.flag) {
+
+                    message.success("Part recevied");
+                    resetForm();
+                    setloding(false)
+
+                } else {
+
+                    message.error("server error")
+                    resetForm();
+                    setloding(false)
+                }
+
+
+            }).catch(err => {
+
+                message.error("Network error")
+                resetForm();
+                setloding(false)
+            })
+
+                
+           }
+
+           
         }
 
 
     })
+
+    const handleCombinedChange = (event:any) => {
+        
+        handleChange(event)
+
+     if(event.target.value==="OW"){
+
+          setow(true)
+     }else{
+
+         setow(false)
+     }
+       
+    };
+
+
+   
 
 
 
@@ -84,11 +166,16 @@ function page() {
 
         <div>
 
-            <div className='w-full h-screen bg-[#16161d] pt-10  ' >
+            <div className='w-full h-screen bg-[#E7F0DC] pt-10  ' >
 
                 <Navebar />
 
-                <div className=' flex justify-center ' >
+               
+
+                   
+
+
+                    <div className=' flex justify-center ' >
 
                     <div className=' w-full sm:w-[1000px] h-[900px] sm:h-[500px]  mt-10 rounded-md p-10' >
 
@@ -96,8 +183,8 @@ function page() {
 
                             <div>
 
-                                <label htmlFor="" className='text-white' > Part Name    </label><br />
-                                <input type="text" placeholder='part name' className='border-2 border-blue-500 w-[300px] h-[40px] text-white bg-gray-600'
+                                <label htmlFor="" className='text-black' > Part Name    </label><br />
+                                <input type="text" placeholder='part name' className='border-2 border-black w-[300px] h-[40px]  bg-gray-200'
                                     name="partname"
                                     value={values.partname}
                                     onChange={handleChange}
@@ -119,8 +206,8 @@ function page() {
 
                             <div>
 
-                                <label htmlFor="" className='text-white' > Part code    </label><br />
-                                <input type="text" placeholder='part code' className='border-2 border-blue-500 text-white w-[300px] h-[40px] bg-gray-600'
+                                <label htmlFor="" className='text-black' > Part code    </label><br />
+                                <input type="text" placeholder='part code' className='border-2 border-black  w-[300px] h-[40px] bg-gray-200'
                                     name="partcode"
                                     value={values.partcode}
                                     onChange={handleChange}
@@ -143,8 +230,8 @@ function page() {
 
                             <div>
 
-                                <label htmlFor="" className='text-white' > Customer Name    </label><br />
-                                <input type="text" placeholder='customer name' className='border-2 border-blue-500 text-white w-[300px] h-[40px] bg-gray-600'
+                                <label htmlFor="" className='text-black' > Customer Name    </label><br />
+                                <input type="text" placeholder='customer name' className='border-2 border-black  w-[300px] h-[40px] bg-gray-200'
                                     name="customername"
                                     value={values.customername}
                                     onChange={handleChange}
@@ -168,8 +255,8 @@ function page() {
 
                             <div>
 
-                                <label htmlFor="" className='text-white' > Customer Number   </label><br />
-                                <input type="text" placeholder='customer number' className='border-2 border-blue-500 text-white w-[300px] h-[40px] bg-gray-600'
+                                <label htmlFor="" className='text-black' > Customer Number   </label><br />
+                                <input type="text" placeholder='customer number' className='border-2 border-black  w-[300px] h-[40px] bg-gray-200'
                                     name="customernumber"
                                     value={values.customernumber}
                                     onChange={handleChange}
@@ -192,16 +279,17 @@ function page() {
 
                             <div>
 
-                                <label htmlFor="" className='text-white' > Warranty Status   </label><br />
+                                <label htmlFor="" className='text-black' > Warranty Status   </label><br />
 
-                                <select value={values.warrantystatus} onChange={handleChange} onBlur={handleBlur}
-                                    name="warrantystatus" id="" className='border-2 border-blue-500 w-[300px] bg-gray-600 h-[40px] text-white'  >
+                                <select value={values.warrantystatus}  onChange={handleCombinedChange} onBlur={handleBlur}
+                                    
+                                    name="warrantystatus" id="" className='border-2 border-black w-[300px] bg-gray-200 h-[40px] '  >
 
                                     <option value="">enter warranty status </option>
 
                                     <option value="IW">IW</option>
 
-                                    <option value="OW">OW</option>
+                                    <option  value="OW">OW</option>
 
                                 </select> <br />
 
@@ -223,15 +311,19 @@ function page() {
 
                             <div>
 
-                                <label htmlFor="" className='text-white' > Company  </label><br />
+                                <label htmlFor="" className='text-black' > Company  </label><br />
                                 <select value={values.company} onChange={handleChange} onBlur={handleBlur}
-                                    name="company" id="" className='border-2 border-blue-500 w-[300px] bg-gray-600 h-[40px] text-white'  >
+                                    name="company" id="" className='border-2 border-black w-[300px] bg-gray-200 h-[40px] '  >
 
-                                    <option value="">Company </option>
+                                    <option value="">Select Company </option>
+                                    {
+                                        company.map((obj) => (
 
-                                    <option value="lloyd"> LLoyd </option>
+                                            <option value={obj}> {obj} </option>
+                                        ))
+                                    }
 
-                                    <option value="carrier"> Carried    </option>
+
 
                                 </select><br />
 
@@ -247,6 +339,61 @@ function page() {
 
 
                             </div>
+
+
+                            {
+
+                                ow ?
+                                    <>
+
+                                        <div>
+
+                                            <label htmlFor="" className='text-black' > Amount  </label><br />
+                                            
+                                            <input type="text" placeholder='Part Amount' className='border-2 border-black  w-[300px] h-[40px] bg-gray-200'
+                                                name="owcharge"
+                                                value={values.owcharge}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            /><br />
+
+
+
+                                           
+
+
+                                        </div>
+
+                                        <div className='w-[300px] h-[40px]' >
+
+
+                                        </div>
+
+
+                                    </>
+
+
+                                    :
+                                    null
+
+
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -304,6 +451,11 @@ function page() {
 
 
                 </div>
+
+
+                
+
+                
 
 
 

@@ -83,11 +83,11 @@ function page() {
   return (
     <div>
 
-      <div className="w-full h-screen bg-[#16161d] pt-10  " >
+      <div className="w-full h-screen bg-[#E7F0DC] pt-10  " >
 
         <Navebar />
 
-        <h1 className=" text-white text-center text-[25px] " > Signup  </h1>
+        <h1 className=" text-black text-center text-[25px] mt-5  " > Signup  </h1>
 
 
         <div className="w-full flex justify-center mt-[70px]  " >
@@ -96,9 +96,9 @@ function page() {
 
             <form action="" onSubmit={handleSubmit} >
 
-              <label htmlFor="" className="text-white" > Full Name </label><br />
+              <label htmlFor="" className="text-black" > Full Name </label><br />
               
-              <input className="w-[300px] rounded-sm h-[35px] text-black " type="text" placeholder="your name"
+              <input className="w-[300px] rounded-sm h-[35px] text-black border-2 border-black " type="text" placeholder="your name"
                 name="name"
                 value={values.name}
                 onChange={handleChange}
@@ -120,8 +120,8 @@ function page() {
 
               }
 
-              <label htmlFor="" className="text-white"> Email id </label><br />
-              <input className="w-[300px] rounded-sm h-[35px] " type="text" placeholder="your email id"
+              <label htmlFor="" className="text-black"> Email id </label><br />
+              <input className="w-[300px] rounded-sm h-[35px] border-2 border-black  " type="text" placeholder="your email id"
                name="email"
                value={values.email}
                onChange={handleChange}
@@ -144,8 +144,8 @@ function page() {
 
 
 
-              <label htmlFor="" className="text-white" > password </label><br />
-              <input className="w-[300px] rounded-sm h-[35px]" type="text" placeholder="password"
+              <label htmlFor="" className="text-black" > password </label><br />
+              <input className="w-[300px] rounded-sm h-[35px] border-2 border-black " type="text" placeholder="password"
                name="password"
                value={values.password}
                onChange={handleChange}

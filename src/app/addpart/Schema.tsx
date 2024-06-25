@@ -14,7 +14,9 @@ export const validationSchema=yup.object({
       customername:yup.string().required(" *this filed is required"),
       customernumber:yup.string().required(" *this filed is required"),
       warrantystatus :yup.string().required(" *this filed is required"),
-      company:yup.string().required(" *this filed is required")
+      company:yup.string().required(" *this filed is required"),
+      
+
 
 
 

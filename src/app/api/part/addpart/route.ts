@@ -6,9 +6,15 @@ import { DB } from "@/Helpers/db"
 
 export async function POST(req: NextRequest) {
 
+
+      
+
+
+    
       try {
             
             const data = await req.json()
+            
             const today = new Date();
             const yyyy = today.getFullYear();
             let mm: any = today.getMonth() + 1; // Months start at 0!
@@ -18,18 +24,28 @@ export async function POST(req: NextRequest) {
 
             const formattedToday = dd + '/' + mm + '/' + yyyy;
 
-            data.recevingdate = formattedToday;
+            data.value.recevingdate = formattedToday;
+
+          
+
+            if(data.flag){  // ow part adding time ow status is true 
+
+                    data.value.owstatus=true
+            }
+
+            console.log(data)
 
             await DB.spares.create({
 
-                  data: data
+                  data: data.value
             })
 
             return NextResponse.json({ flag: true })
 
 
-      } catch (error){
+      } catch (error:any){
 
+             console.log(error.message)
 
             return NextResponse.json({ flag: false })
 
