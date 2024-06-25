@@ -18,7 +18,7 @@ export default function page() {
     const [search, setsearch] = useState(false)
     const [searchdata, setsearchdata] = useState([])
     const [serloding, setserloding] = useState(true)
-    const [retdate, setretdate] = useState('')
+    const [subdata, setsubdata] = useState([])
     const [th, setth] = useState([
 
         "Part Name",
@@ -200,6 +200,7 @@ export default function page() {
             if (result.flag) {
 
                 setdata(result.data)
+                setsubdata(result.data)
                 setloading(false)
 
             } else if (result.empty) {
@@ -296,10 +297,10 @@ export default function page() {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        
+
         }).then((result) => {
 
-            if (result.isConfirmed){
+            if (result.isConfirmed) {
 
                 axios.post("/api/part/owpaid", { index }).then((respo) => {
 
@@ -472,7 +473,7 @@ export default function page() {
 
             } else {
 
-                message.error("can't delete. this part dose't returend")
+                message.error("can't delete. this part don't have returend")
             }
 
 
@@ -491,6 +492,9 @@ export default function page() {
                     confirmButtonText: "Yes, delete it!"
                 }).then((result) => {
 
+                    if(result.isConfirmed){
+
+                        
                     axios.delete("/api/part/partdelete", {
 
                         params: {
@@ -528,6 +532,10 @@ export default function page() {
                         message.error("Network error")
                     })
 
+                         
+                    }
+
+
 
 
                 });
@@ -538,6 +546,30 @@ export default function page() {
                 message.error("can't delete. this part amount not paid ")
             }
         }
+
+
+    }
+
+
+      // data filter func
+
+    const filter = (e: any) => {
+
+        
+
+        if (e.target.value === "ALL") {
+
+         setdata(subdata)
+        
+        } else {
+
+
+            const filterdata = subdata.filter((obj: any) => obj.warrantystatus === e.target.value)
+
+            setdata(filterdata)
+
+        }
+
 
 
     }
@@ -567,14 +599,16 @@ export default function page() {
 
                         <button onClick={searchfunc} className='w-[80px] h-[40px] border-2 border-black text-black rounded-lg' > search </button>
 
-                        {/* <select name="" id="">
+                        <select className='ml-5 border-2 border-black ' name="" onChange={filter} id="">
 
                             <option value=""> Filter </option>
-                            <option value=""> OW </option>
+                            <option value="OW"> OW </option>
+                            <option value="IW"> IW </option>
+                            <option value="ALL"> ALL </option>
 
 
 
-                        </select> */}
+                        </select>
 
                     </div>
 
