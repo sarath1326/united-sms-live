@@ -52,7 +52,7 @@ import { message } from 'antd';
 
         console.log("req sent")
 
-        const result= await axios("https://united-sms.vercel.app/api/users/test")
+        const result= await axios("/api/users/test")
 
         console.log("axios result :", result.data)
 
