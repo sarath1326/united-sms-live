@@ -9,6 +9,7 @@ import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 
+
 export async function GET(req: NextRequest) {
 
     try {
@@ -42,10 +43,10 @@ export async function GET(req: NextRequest) {
 
 
 
-    } catch (error) {
+    } catch (error:any) {
 
 
-        return NextResponse.json({ flag: false })
+        return NextResponse.json({ flag: false , msg:error.message })
     }
 
 

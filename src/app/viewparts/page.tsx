@@ -213,6 +213,7 @@ export default function Page() {
             } else {
 
                 message.error("server error")
+                console.log(result.msg)
                 setview(true)
             }
 
