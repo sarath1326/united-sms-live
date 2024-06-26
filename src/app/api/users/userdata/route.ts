@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
 
             const token: any = cookieData[0].value 
 
-            const usedata = await jwt.verify(token, process.env.TOKEN_KEY!)
+            const usedata = await jwt.verify(token, "sarath1937")
 
             return NextResponse.json({ flag: true, data: usedata })
         
