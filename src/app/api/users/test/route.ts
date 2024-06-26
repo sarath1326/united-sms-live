@@ -13,7 +13,7 @@ export async function GET(req:NextRequest){
         
         DBconnecting()
 
-        console.log("req test")
+        console.log("req test is ok")
 
         const result= await sparesschema.find()
 
