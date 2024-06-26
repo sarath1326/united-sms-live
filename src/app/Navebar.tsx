@@ -32,7 +32,7 @@ function Navebar() {
             } else if (result.err) {
                 
                 message.error(result.msg)
-                console.log("nav error")
+                console.log("nav error",result.msg)
                 setname(" ")
 
             } else {
