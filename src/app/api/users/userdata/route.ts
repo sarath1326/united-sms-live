@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 
         } else {
 
-            const usedata = await jwt.verify(token, "sarath1937")
+            const usedata = await jwt.verify(token, process.env.TOKEN_KEY!)
 
             return NextResponse.json({ flag: true, data: usedata })
 
