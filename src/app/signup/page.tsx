@@ -13,7 +13,7 @@ import axios from "axios"
 import {message} from "antd"
 
 
-function page() {
+function Page() {
 
  
   const [loding, setloding] = useState(false)
@@ -233,4 +233,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

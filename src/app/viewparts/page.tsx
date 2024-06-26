@@ -1,3 +1,5 @@
+
+
 "use client"
 
 import React from 'react'
@@ -11,7 +13,7 @@ import axios from 'axios'
 import { message } from 'antd'
 import Swal from 'sweetalert2'
 
-export default function page() {
+export default function Page() {
 
     const [data, setdata]: any = useState([])
     const [input, setinput] = useState('')
