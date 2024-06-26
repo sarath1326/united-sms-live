@@ -10,10 +10,10 @@ import { message } from 'antd';
 
 
 
+  function Navebar() {
 
 
-
-function Navebar() {
+    
 
     const router = useRouter()
     const [name, setname] = useState(" ")

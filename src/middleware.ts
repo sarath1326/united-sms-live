@@ -3,16 +3,38 @@
 
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
+import { cookies } from 'next/headers'
+
+
+async function getCookieData() {
+  const cookieData = cookies().getAll()
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(cookieData)
+    },0)
+  )
+}
 
 
 
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
 
       const path= request.nextUrl.pathname
-    const token = request.cookies.get("DSMtoken")?.value || null
 
-    if(path==="/viewpart"){
+      const cookieData:any = await getCookieData()
+      
+      let token:any
+
+      if(cookieData.length===0){
+
+          token=false
+      }else{
+
+         token=true
+      }
+
+      if(path==="/viewpart"){
 
         if(token){
 

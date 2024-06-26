@@ -2,6 +2,18 @@
 import { DB } from "@/Helpers/db"
 import { NextRequest, NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
+import { cookies } from 'next/headers'
+
+
+async function getCookieData() {
+    const cookieData = cookies().getAll()
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        resolve(cookieData)
+      }, 0)
+    )
+  }
+
 
 
 export async function GET(req: NextRequest) {
@@ -9,21 +21,26 @@ export async function GET(req: NextRequest) {
 
     try {
 
-        const token: any = req.cookies.get("DSMtoken")?.value || null 
 
-        if (token === null) {
+        const cookieData:any = await getCookieData()
 
-            console.log("no token")
+        console.log("cookis",cookieData)
 
-            return NextResponse.json({ flag:false })
+        if(cookieData.length===0){
 
-        } else {
+              console.log("no token")
+
+              return  NextResponse.json({ flag:false })
+
+        }else{
+
+            const token: any = cookieData[0].value 
 
             const usedata = await jwt.verify(token, process.env.TOKEN_KEY!)
 
             return NextResponse.json({ flag: true, data: usedata })
-
-
+        
+        
         }
 
 
