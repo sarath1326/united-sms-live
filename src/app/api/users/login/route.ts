@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
 
             if (final) {
 
-                const token = jwt.sign({ name: finduser.name, id: finduser.id }, "sarath1937");
+                const token = jwt.sign({ name: finduser.name, id: finduser.id }, process.env.TOKEN_KEY!);
 
                 const responce = NextResponse.json({ flag: true })
 
