@@ -47,7 +47,7 @@ function Page() {
 
           setloding(true)
           
-        await  axios.post("/api/users/signup",values).then((repo:any)=>{
+         axios.post("/api/users/signup",values).then((repo:any)=>{
 
                     const result=repo.data;
 

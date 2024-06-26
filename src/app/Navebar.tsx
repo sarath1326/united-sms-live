@@ -48,6 +48,17 @@ import { message } from 'antd';
     //     })
     // })
 
+    const test=async()=>{
+
+        console.log("req sent")
+
+        const result= await axios("https://united-sms.vercel.app/api/users/test")
+
+        console.log("axios result :", result.data)
+
+         
+    }
+
 
 
 
@@ -61,7 +72,9 @@ import { message } from 'antd';
                 <div className='w-[50%] h-[100%]  pl-5' >
 
                   
-                    <span className=' text-[25px] text-[#FF204E] ml-5' > SMS </span>
+                    <span onClick={test} className=' text-[25px] text-[#FF204E] ml-5' > SMS </span>
+
+
 
                     <span onClick={()=>{router.push("/")}} className='text-[15px] font-bold text-black  ml-10 cursor-pointer' > Home  </span>
 
