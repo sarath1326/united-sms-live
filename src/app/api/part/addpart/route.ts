@@ -2,6 +2,8 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { DB } from "@/Helpers/db"
+import {sparesschema} from "@/models/spares"
+import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 export async function POST(req: NextRequest) {
@@ -12,6 +14,8 @@ export async function POST(req: NextRequest) {
 
     
       try {
+
+            DBconnecting()
             
             const data = await req.json()
             
@@ -35,10 +39,15 @@ export async function POST(req: NextRequest) {
 
             console.log(data)
 
-            await DB.spares.create({
+              const final=  new sparesschema(data.value)
 
-                  data: data.value
-            })
+              await final.save()
+
+
+            // await DB.spares.create({
+
+            //       data: data.value
+            // })
 
             return NextResponse.json({ flag: true })
 

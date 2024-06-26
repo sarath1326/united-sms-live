@@ -1,6 +1,8 @@
 
 import { NextRequest, NextResponse } from "next/server"
 import { DB } from "@/Helpers/db"
+import {sparesschema} from "@/models/spares"
+import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 
@@ -8,6 +10,8 @@ import { DB } from "@/Helpers/db"
 export async function POST(req: NextRequest) {
 
     try {
+
+        DBconnecting()
 
         const { index } = await req.json()
 
@@ -21,15 +25,24 @@ export async function POST(req: NextRequest) {
 
         const formattedToday = dd + '/' + mm + '/' + yyyy;
 
-        await DB.spares.update({
+        await sparesschema.updateOne({_id:index},{
 
-            where: { id:index },
-            data: {
+             $set:{
 
                 partsent: true,
                 partsentdate: formattedToday
-            }
+             }
         })
+
+        // await DB.spares.update({
+
+        //     where: { id:index },
+        //     data: {
+
+        //         partsent: true,
+        //         partsentdate: formattedToday
+        //     }
+        // })
 
         return NextResponse.json({ flag: true , date:formattedToday })
 

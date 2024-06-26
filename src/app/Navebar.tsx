@@ -59,7 +59,7 @@ function Navebar() {
 
                 <div className='w-[50%] h-[100%]  pl-5' >
 
-                    <span className=' text-[25px] text-blue-700' > United  Service  </span>
+                  
                     <span className=' text-[25px] text-[#FF204E] ml-5' > SMS </span>
 
                     <span onClick={()=>{router.push("/")}} className='text-[15px] font-bold text-black  ml-10 cursor-pointer' > Home  </span>

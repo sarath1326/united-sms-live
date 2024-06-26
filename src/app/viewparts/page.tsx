@@ -117,7 +117,7 @@ export default function page() {
 
                                     :
 
-                                    <span onClick={() => { owpaid(obj.id) }} className="px-2 inline-flex text-xs  leading-5 font-semibold rounded-full ml-2 cursor-pointer bg-red-100 text-red-800">
+                                    <span onClick={() => { owpaid(obj._id) }} className="px-2 inline-flex text-xs  leading-5 font-semibold rounded-full ml-2 cursor-pointer bg-red-100 text-red-800">
                                         Not Paid
                                     </span>
 
@@ -147,7 +147,7 @@ export default function page() {
 
                             <td className="px-6 py-4 whitespace-nowrap"  >
 
-                                <input onClick={() => { partsent(obj.id) }} type="checkbox" />
+                                <input onClick={() => { partsent(obj._id) }} type="checkbox" />
 
                             </td>
 
@@ -157,7 +157,7 @@ export default function page() {
 
                 <td>
 
-                    <span onClick={() => { deletefunc(obj.id, index) }} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800-800 cursor-pointer">
+                    <span onClick={() => { deletefunc(obj._id, index) }} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800-800 cursor-pointer">
                         Delete
                     </span>
 
@@ -248,7 +248,7 @@ export default function page() {
 
                     if (result.flag) {
 
-                        const finddata = data.filter((obj: any) => obj.id === index)
+                        const finddata = data.filter((obj: any) => obj._id === index)
 
                         finddata[0].partsent = true
                         finddata[0].partsentdate = result.date
@@ -308,7 +308,7 @@ export default function page() {
 
                     if (result.flag) {
 
-                        const finddata = data.filter((obj: any) => obj.id === index)
+                        const finddata = data.filter((obj: any) => obj._id === index)
 
                         finddata[0].owpaid = true
 
@@ -413,7 +413,7 @@ export default function page() {
 
     const deletefunc = (id: any, index: any) => {
 
-        const finddata = data.filter((obj: any) => obj.id === id)
+        const finddata = data.filter((obj: any) => obj._id === id)
 
         if (finddata[0].warrantystatus === "IW") {
 
@@ -725,7 +725,7 @@ export default function page() {
 
                                                                             :
 
-                                                                            <span onClick={() => { owpaid(obj.id) }} className="px-2 inline-flex text-xs  leading-5 font-semibold rounded-full ml-2 cursor-pointer bg-red-100 text-red-800">
+                                                                            <span onClick={() => { owpaid(obj._id) }} className="px-2 inline-flex text-xs  leading-5 font-semibold rounded-full ml-2 cursor-pointer bg-red-100 text-red-800">
                                                                                 Not Paid
                                                                             </span>
 
@@ -755,7 +755,7 @@ export default function page() {
 
                                                                     <td className="px-6 py-4 whitespace-nowrap"  >
 
-                                                                        <input onClick={() => { partsent(obj.id) }} type="checkbox" />
+                                                                        <input onClick={() => { partsent(obj._id) }} type="checkbox" />
 
                                                                     </td>
 
@@ -765,7 +765,7 @@ export default function page() {
 
                                                         <td>
 
-                                                            <span onClick={() => { deletefunc(obj.id, index) }} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800-800 cursor-pointer">
+                                                            <span onClick={() => { deletefunc(obj._id, index) }} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800-800 cursor-pointer">
                                                                 Delete
                                                             </span>
 

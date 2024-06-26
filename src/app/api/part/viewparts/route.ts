@@ -3,12 +3,17 @@
 import { DB } from "@/Helpers/db"
 
 import { NextRequest, NextResponse } from "next/server"
+import {sparesschema} from "@/models/spares"
+import {DBconnecting} from "@/DBconfig/Dbconn"
+
 
 
 
 export async function GET(req: NextRequest) {
 
     try {
+
+        DBconnecting()
 
         const url = new URL(req.url);
         const params = new URLSearchParams(url.search)
@@ -19,13 +24,7 @@ export async function GET(req: NextRequest) {
 
 
 
-        const data = await DB.spares.findMany({
-
-            where: {
-
-                company: companyName
-            }
-        })
+        const data = await sparesschema.find({ company: companyName })
 
         if (data.length === 0) {
 

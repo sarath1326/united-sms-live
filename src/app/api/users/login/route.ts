@@ -4,6 +4,8 @@ import { DB } from "@/Helpers/db"
 import bcrypt from "bcrypt"
 import { cookies } from "next/headers"
 import jwt from "jsonwebtoken"
+import {userSchema} from "@/models/users"
+import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 
@@ -12,13 +14,17 @@ export async function POST(req: NextRequest) {
 
     try {
 
+        DBconnecting()
+
         const data = await req.json()
 
-        const finduser = await DB.users.findUnique({
+        const finduser = await userSchema.findOne({
 
-            where: { email: data.email }
+            email: data.email 
 
         })
+
+        console.log("user",finduser)
 
         if (finduser) {
 

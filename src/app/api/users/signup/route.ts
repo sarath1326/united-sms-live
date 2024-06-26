@@ -2,34 +2,42 @@
 
 
 import { DB } from "@/Helpers/db"
+import {userSchema} from "@/models/users"
 import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcrypt";
+import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 
 export async function POST(req: NextRequest) {  // signup post req
 
+   
+
     try {
 
+        DBconnecting()
+        
+
+
         const data = await req.json()
+        
 
-        const finduser = await DB.users.findUnique({  // check this user already crete a account
+        const finduser = await userSchema.findOne({  // check this user already crete a account
 
-            where: { email: data.email }
+             email: data.email 
         })
+
+        console.log("user created",finduser)
 
         if (!finduser) {
 
             data.password = await bcrypt.hash(data.password, 10);
 
-            
+            const final= new userSchema(data) // create new user
+             await final.save()
 
-            await DB.users.create({  // create new user
-                
-                data:data
-           
-             })           
-               console.log("user careted")
+            
+             console.log("user careted")
              return NextResponse.json({flag:true})
 
         } else {
@@ -41,7 +49,8 @@ export async function POST(req: NextRequest) {  // signup post req
     } catch (error) {
 
       console.log("catech err", error)
-        return NextResponse.json({ flag: false })
+        
+      return NextResponse.json({ flag: false })
 
     }
 

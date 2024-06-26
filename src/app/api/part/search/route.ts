@@ -1,31 +1,41 @@
 
 import { NextRequest, NextResponse } from "next/server"
 import { DB } from "@/Helpers/db"
+import {sparesschema} from "@/models/spares"
+import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 export async function GET(req: NextRequest) {
 
       try {
 
+            DBconnecting()
+
             const url = new URL(req.url);
             const params = new URLSearchParams(url.search)
 
             const data: any = params.get("data")
 
-            const finddata = await DB.spares.findMany({
+            const finddata= await sparesschema.find({partcode:data})
 
-                  where: { partcode: data }
-            })
+            // const finddata = await DB.spares.findMany({
 
+            //       where: { partcode: data }
+            // })
+
+            
+            
             if (finddata.length === 0) {
 
-                  const findresult = await DB.spares.findMany({
+                  const findresult = await sparesschema.find({customernumber:data})
 
-                        where: {
+                  // const findresult = await DB.spares.findMany({
 
-                              customernumber: data
-                        }
-                  })
+                  //       where: {
+
+                  //             customernumber: data
+                  //       }
+                  // })
 
                   if(findresult.length===0){
 

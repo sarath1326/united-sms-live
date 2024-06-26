@@ -1,6 +1,8 @@
 
 import {NextRequest,NextResponse} from "next/server"
 import {DB} from "@/Helpers/db"
+import {sparesschema} from "@/models/spares"
+import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 export async function POST(req:NextRequest){
@@ -14,13 +16,22 @@ export async function POST(req:NextRequest){
 
    try {
 
+     DBconnecting()
+
+
+    await sparesschema.updateOne({_id:index},{
+
+        $set:{owpaid:true}
+    
+     })
+
    
 
-    await DB.spares.update({
+//     await DB.spares.update({
 
-         where:{id:index},
-         data:{owpaid:true}
-    })
+//          where:{id:index},
+//          data:{owpaid:true}
+//     })
 
      return NextResponse.json({flag:true})
     
