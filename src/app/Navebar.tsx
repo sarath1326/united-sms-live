@@ -31,7 +31,8 @@ function Navebar() {
 
             } else if (result.err) {
                 
-                message.error("server error")
+                message.error(result.msg)
+                console.log("nav error")
                 setname(" ")
 
             } else {

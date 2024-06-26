@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
     } catch (error:any) {
 
         console.log(error.message)
-        return NextResponse.json({ err: true })
+        return NextResponse.json({ err: true , msg:error.message })
 
     }
 
