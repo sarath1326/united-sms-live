@@ -76,7 +76,7 @@ export default function Page() {
         (
 
 
-            <tr>
+            <tr key={index} >
 
                 <td className="px-6 py-4 whitespace-nowrap">{obj.partname}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-blue-600 ">{obj.partcode}</td>
@@ -664,9 +664,9 @@ export default function Page() {
                                             <tr>
 
                                                 {
-                                                    th.map((obj) => (
+                                                    th.map((obj, index) => (
 
-                                                        <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
+                                                        <th key={index} className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
 
 
                                                     ))
@@ -684,7 +684,7 @@ export default function Page() {
 
                                                 searchdata.map((obj: any, index: any) => (
 
-                                                    <tr>
+                                                    <tr key={index}>
 
                                                         <td className="px-6 py-4 whitespace-nowrap">{obj.partname}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-blue-600 ">{obj.partcode}</td>
@@ -825,9 +825,9 @@ export default function Page() {
 
                                     <option value=""> Select Company </option>
                                     {
-                                        company.map((obj) => (
+                                        company.map((obj,index) => (
 
-                                            <option value={obj}> {obj} </option>
+                                            <option key={index} value={obj}> {obj} </option>
                                         ))
                                     }
 
@@ -876,9 +876,9 @@ export default function Page() {
                                                 <tr>
 
                                                     {
-                                                        th.map((obj) => (
+                                                        th.map((obj,index) => (
 
-                                                            <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
+                                                            <th key={index} className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
 
 
                                                         ))

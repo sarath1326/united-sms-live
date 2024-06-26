@@ -11,7 +11,7 @@ import { ThreeDots } from 'react-loader-spinner'
 import { useState } from 'react';
 
 
-function page() {
+function Page() {
 
     const [loding, setloding] = useState(false)
     const [ow, setow] = useState(false)
@@ -483,4 +483,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

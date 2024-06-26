@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 
 
 
-export default function Loginpage() {
+export default function Page() {
 
   const [loding, setloding] = useState(false)
   const [show,setshow]=useState(true)
