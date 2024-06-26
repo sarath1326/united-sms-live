@@ -76,6 +76,7 @@ export default function Page() {
       }).catch(err => {
 
         message.error("Network error")
+        console.log(err)
         setloding(false)
       })
 
