@@ -317,9 +317,9 @@ function Page() {
 
                                     <option value="">Select Company </option>
                                     {
-                                        company.map((obj) => (
+                                        company.map((obj,index) => (
 
-                                            <option value={obj}> {obj} </option>
+                                            <option key={index} value={obj}> {obj} </option>
                                         ))
                                     }
 
