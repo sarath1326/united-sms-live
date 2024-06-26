@@ -43,11 +43,11 @@ function Page() {
     initialValues: initalValues,
     validationSchema: validationSchema,
 
-    onSubmit: (value) => {
+    onSubmit: async (value) => {
 
           setloding(true)
           
-          axios.post("/api/users/signup",values).then((repo:any)=>{
+        await  axios.post("/api/users/signup",values).then((repo:any)=>{
 
                     const result=repo.data;
 
