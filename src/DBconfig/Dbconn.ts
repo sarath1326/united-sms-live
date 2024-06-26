@@ -6,7 +6,7 @@ export const  DBconnecting= async()=>{
     
     try {
 
-          mongoose.connect(process.env.MONGO_URL!)
+          mongoose.connect("mongodb+srv://sarathpm:sarath1937@cluster0.katyfou.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
           const connection=mongoose.connection
           connection.on("connected",()=>{
 
