@@ -10,22 +10,23 @@ import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
 
     try {
 
         DBconnecting()
 
-        const url = req.nextUrl; 
-        const params = url.searchParams; // Extracts the query parameters from the URL
+        // const params = req.nextUrl.searchParams 
+        // // Extracts the query parameters from the URL
 
-        const companyName: any = params.get("company"); // Retrieves the value of the "company" query parameter
+        // const companyName: any = params.get("company"); // Retrieves the value of the "company" query parameter
 
+        const companyName = await req.json()
         console.log(companyName)
 
 
 
-        const data = await sparesschema.find({ company: companyName })
+        const data = await sparesschema.find({ company: companyName.name})
 
         if (data.length === 0) {
 

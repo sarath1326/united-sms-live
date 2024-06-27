@@ -190,12 +190,12 @@ export default function Page() {
 
         setview(false)
 
-        axios("/api/part/viewparts", {
-            params: {
+        const companyname={
+             
+             name: e.target.value
+        }
 
-                company: e.target.value
-            }
-        }).then((respo) => {
+        axios.post("/api/part/viewparts",companyname).then((respo) => {
 
             const result = respo.data
 
@@ -220,7 +220,9 @@ export default function Page() {
         }).catch(err => {
 
             setview(true)
-            message.error("Network Error")
+            message.error("Network Error" , err.message)
+
+            console.log("view error",err)
         })
 
 
