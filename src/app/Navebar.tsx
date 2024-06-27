@@ -71,7 +71,7 @@ import { message } from 'antd';
 
                 <div className='w-[50%] h-[100%]  pl-5' >
 
-                  
+                  <span className='text-blue-600 font-medium text-[25px] ' > United Service  </span>
                     <span onClick={test} className=' text-[25px] text-[#FF204E] ml-5' > SMS </span>
 
 
