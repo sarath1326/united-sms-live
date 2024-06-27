@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
         DBconnecting()
 
-        const url = req.nextUrl; // Use req.nextUrl to get the URL object directly
+        const url = req.nextUrl; 
         const params = url.searchParams; // Extracts the query parameters from the URL
 
         const companyName: any = params.get("company"); // Retrieves the value of the "company" query parameter
