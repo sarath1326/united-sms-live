@@ -19,34 +19,34 @@ import { message } from 'antd';
     const [name, setname] = useState(" ")
     const [flag, setflag] = useState(false)
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     axios("/api/users/userdata").then((respo: any) => {
+        axios("/api/users/userdata").then((respo: any) => {
 
-    //         const result = respo.data
+            const result = respo.data
 
-    //         if (result.flag) {
+            if (result.flag) {
 
-    //             setname(result.data.name)
+                setname(result.data.name)
 
-    //         } else if (result.err) {
+            } else if (result.err) {
                 
-    //             message.error(result.msg)
-    //             console.log("nav error",result.msg)
-    //             setname(" ")
+                message.error(result.msg)
+                console.log("nav error",result.msg)
+                setname(" ")
 
-    //         } else {
+            } else {
 
-    //             setflag(false)
-    //             setname(" ")
-    //         }
+                setflag(false)
+                setname(" ")
+            }
 
 
-    //     }).catch(err => {
+        }).catch(err => {
 
-    //         message.error("Network error")
-    //     })
-    // })
+            message.error("Network error")
+        })
+    })
 
     const test=async()=>{
 
