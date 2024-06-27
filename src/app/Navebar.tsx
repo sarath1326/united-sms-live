@@ -17,7 +17,7 @@ import { message } from 'antd';
 
     const router = useRouter()
     const [name, setname] = useState(" ")
-    const [flag, setflag] = useState(false)
+    const [flag, setflag] = useState(true)
 
     useEffect(() => {
 
