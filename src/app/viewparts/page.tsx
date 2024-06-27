@@ -359,14 +359,12 @@ export default function Page() {
 
             setsearch(true)
 
-            axios("/api/part/search", {
+            const sentdata={
 
-                params: {
+                 name:input
+            }
 
-                    data: input
-                }
-
-            }).then((respo) => {
+            axios.post("/api/part/search",sentdata).then((respo) => {
 
                 const result = respo.data
 
@@ -435,13 +433,13 @@ export default function Page() {
                 }).then((result) => {
                     if (result.isConfirmed) {
 
-                        axios.delete("/api/part/partdelete", {
+                      
+                        const sentdata={
 
-                            params: {
+                            id:id
+                        }
 
-                                id: id
-                            }
-                        }).then((respo) => {
+                        axios.post("/api/part/partdelete",sentdata).then((respo) => {
 
                             const result = respo.data
 
@@ -499,14 +497,14 @@ export default function Page() {
 
                     if(result.isConfirmed){
 
-                        
-                    axios.delete("/api/part/partdelete", {
+                        const sentdata={
 
-                        params: {
-
-                            id: id
+                            id:id
                         }
-                    }).then((respo) => {
+
+
+                        
+                    axios.post("/api/part/partdelete", sentdata).then((respo) => {
 
                         const result = respo.data
 

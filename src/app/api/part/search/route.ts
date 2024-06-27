@@ -5,20 +5,20 @@ import {sparesschema} from "@/models/spares"
 import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
 
       try {
 
             DBconnecting()
 
-            const url = req.nextUrl; // Use req.nextUrl to get the URL object directly
-            const params = url.searchParams; // Extracts the query parameters from the URL
+            // const url = req.nextUrl; // Use req.nextUrl to get the URL object directly
+            // const params = url.searchParams; // Extracts the query parameters from the URL
     
 
            
-            const data: any = params.get("data")
+            const data= await req.json()
 
-            const finddata= await sparesschema.find({partcode:data})
+            const finddata= await sparesschema.find({partcode:data.name})
 
             // const finddata = await DB.spares.findMany({
 
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
             
             if (finddata.length === 0) {
 
-                  const findresult = await sparesschema.find({customernumber:data})
+                  const findresult = await sparesschema.find({customernumber:data.name})
 
                   // const findresult = await DB.spares.findMany({
 

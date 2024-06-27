@@ -5,20 +5,20 @@ import {sparesschema} from "@/models/spares"
 import {DBconnecting} from "@/DBconfig/Dbconn"
 
 
-export async function DELETE(req: NextRequest) {
+export async function POST(req: NextRequest) {
 
     try {
 
         DBconnecting()
 
-        const url = req.nextUrl; // Use req.nextUrl to get the URL object directly
-        const params = url.searchParams; // Extracts the query parameters from the URL
+        // const url = req.nextUrl; // Use req.nextUrl to get the URL object directly
+        // const params = url.searchParams; // Extracts the query parameters from the URL
 
 
-        const id: any = params.get("id")
+        const id= await req.json()
 
        
-      await sparesschema.deleteOne({_id:id}) 
+      await sparesschema.deleteOne({_id:id.id}) 
 
 
 
