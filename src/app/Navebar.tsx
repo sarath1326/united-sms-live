@@ -59,6 +59,28 @@ import { message } from 'antd';
          
     }
 
+    const logout=()=>{
+
+          axios.post("/api/users/logout").then((respo)=>{
+
+                    const result=respo.data
+
+                    if(result.flag){
+
+                         message.success("your are Logout")
+                    }else{
+
+
+                         message.error("server error")
+                    }
+  
+                
+          }).catch(err=>{
+
+                message.error("Network Error")
+          })
+    }
+
 
 
 
@@ -90,7 +112,7 @@ import { message } from 'antd';
 
                         flag ?
 
-                            <button onClick={() => { router.push("/login") }} className='w-[80px] h-[35px] hover:bg-blue-400 hover:text-white bg-white border-2 border-black rounded-md text-black' >
+                            <button onClick={logout} className='w-[80px] h-[35px] hover:bg-blue-400 hover:text-white bg-white border-2 border-black rounded-md text-black' >
 
                                 Logout
 
