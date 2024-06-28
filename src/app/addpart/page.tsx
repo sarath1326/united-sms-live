@@ -38,6 +38,7 @@ function Page() {
         warrantystatus: string
         company: string
         owcharge: string
+        techname: string
 
 
     }
@@ -50,7 +51,8 @@ function Page() {
         customernumber: "",
         warrantystatus: "",
         company: "",
-        owcharge: ""
+        owcharge: "",
+        techname: ""
 
     }
 
@@ -62,104 +64,106 @@ function Page() {
 
         onSubmit: (value, { resetForm }) => {
 
-           if(value. owcharge.length===0){
+            if (value.owcharge.length === 0) {
 
-            const sentdata={
+                const sentdata = {
 
-                value,
-                flag:false
-          }
-
-
-           setloding(true)
-
-            axios.post("/api/part/addpart", sentdata).then((respo) => {
-
-                const result = respo.data
-
-                if (result.flag) {
-
-                    message.success("Part recevied");
-                    resetForm();
-                    setloding(false)
-
-                } else {
-
-                    message.error("server error")
-                    resetForm();
-                    setloding(false)
+                    value,
+                    flag: false
                 }
 
 
-            }).catch(err => {
+                setloding(true)
 
-                message.error("Network error")
-                resetForm();
-                setloding(false)
-            })
-          
-          
-            }else{
+                console.log(value)
 
-                 const sentdata={
+                axios.post("/api/part/addpart", sentdata).then((respo) => {
 
-                       value,
-                       flag:true
-                 }
+                    const result = respo.data
+
+                    if (result.flag) {
+
+                        message.success("Part recevied");
+                        resetForm();
+                        setloding(false)
+
+                    } else {
+
+                        message.error("server error")
+                        resetForm();
+                        setloding(false)
+                    }
 
 
-                  setloding(true)
+                }).catch(err => {
 
-            axios.post("/api/part/addpart", sentdata).then((respo) => {
-
-                const result = respo.data
-
-                if (result.flag) {
-
-                    message.success("Part recevied");
+                    message.error("Network error")
                     resetForm();
                     setloding(false)
+                })
 
-                } else {
 
-                    message.error("server error")
-                    resetForm();
-                    setloding(false)
+            } else {
+
+                const sentdata = {
+
+                    value,
+                    flag: true
                 }
 
 
-            }).catch(err => {
+                setloding(true)
 
-                message.error("Network error")
-                resetForm();
-                setloding(false)
-            })
+                axios.post("/api/part/addpart", sentdata).then((respo) => {
 
-                
-           }
+                    const result = respo.data
 
-           
+                    if (result.flag) {
+
+                        message.success("Part recevied");
+                        resetForm();
+                        setloding(false)
+
+                    } else {
+
+                        message.error("server error")
+                        resetForm();
+                        setloding(false)
+                    }
+
+
+                }).catch(err => {
+
+                    message.error("Network error")
+                    resetForm();
+                    setloding(false)
+                })
+
+
+            }
+
+
         }
 
 
     })
 
-    const handleCombinedChange = (event:any) => {
-        
+    const handleCombinedChange = (event: any) => {
+
         handleChange(event)
 
-     if(event.target.value==="OW"){
+        if (event.target.value === "OW") {
 
-          setow(true)
-     }else{
+            setow(true)
+        } else {
 
-         setow(false)
-     }
-       
+            setow(false)
+        }
+
     };
 
 
-   
+
 
 
 
@@ -172,14 +176,14 @@ function Page() {
 
                 <Navebar />
 
-               
-
-                   
 
 
-                    <div className=' flex justify-center ' >
 
-                    <div className=' w-full sm:w-[1000px] h-[900px] sm:h-[500px]  mt-10 rounded-md p-10' >
+
+
+                <div className=' flex justify-center ' >
+
+                    <div className=' w-full sm:w-[1000px] min-h-[900px] sm:h-[500px]  mt-10 rounded-md p-10' >
 
                         <form onSubmit={handleSubmit} action="" className='flex gap-10 flex-wrap justify-center' >
 
@@ -283,15 +287,15 @@ function Page() {
 
                                 <label htmlFor="" className='text-black' > Warranty Status   </label><br />
 
-                                <select value={values.warrantystatus}  onChange={handleCombinedChange} onBlur={handleBlur}
-                                    
+                                <select value={values.warrantystatus} onChange={handleCombinedChange} onBlur={handleBlur}
+
                                     name="warrantystatus" id="" className='border-2 border-black w-[300px] bg-gray-200 h-[40px] '  >
 
                                     <option value="">enter warranty status </option>
 
                                     <option value="IW">IW</option>
 
-                                    <option  value="OW">OW</option>
+                                    <option value="OW">OW</option>
 
                                 </select> <br />
 
@@ -319,7 +323,7 @@ function Page() {
 
                                     <option value="">Select Company </option>
                                     {
-                                        company.map((obj,index) => (
+                                        company.map((obj, index) => (
 
                                             <option key={index} value={obj}> {obj} </option>
                                         ))
@@ -351,7 +355,7 @@ function Page() {
                                         <div>
 
                                             <label htmlFor="" className='text-black' > Amount  </label><br />
-                                            
+
                                             <input type="text" placeholder='Part Amount' className='border-2 border-black  w-[300px] h-[40px] bg-gray-200'
                                                 name="owcharge"
                                                 value={values.owcharge}
@@ -361,7 +365,7 @@ function Page() {
 
 
 
-                                           
+
 
 
                                         </div>
@@ -380,6 +384,44 @@ function Page() {
 
 
                             }
+
+
+                            <div>
+
+                                <label htmlFor="" className='text-black' > Tech Name  </label><br />
+
+                                <input type="text" placeholder='tech name' className='border-2 border-black  w-[300px] h-[40px] bg-gray-200'
+                                    name="techname"
+                                    value={values.techname}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                /><br />
+
+
+                                {
+                                    errors.techname && touched.techname ?
+
+                                        <span className='text-red-600' > {errors.techname} </span>
+
+                                        : null
+                                }
+
+
+
+
+
+
+
+
+
+                            </div>
+
+                            <div className='w-[300px] h-[40px]' >
+
+
+                            </div>
+
+
 
 
 
@@ -455,9 +497,9 @@ function Page() {
                 </div>
 
 
-                
 
-                
+
+
 
 
 

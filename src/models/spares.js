@@ -11,7 +11,9 @@ export const sparesschema = mongoose.models.Spares || mongoose.model('Spares', n
     customernumber : String,
     warrantystatus : String,
     company       : String,
-    partsent      : {type:Boolean , default:false },       
+    partsent      : {type:Boolean , default:false },  
+    
+    techname     : String,
    
     partsentdate  :{ type:String , default:"null"},
    

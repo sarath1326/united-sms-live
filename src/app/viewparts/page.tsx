@@ -27,6 +27,7 @@ export default function Page() {
         "Part Code ",
         " Customer Name",
         "Customer Number",
+        "Tech Name",
         "Warranty Status",
         " Company",
         "Receving Date",
@@ -84,6 +85,7 @@ export default function Page() {
                 <td className="px-6 py-4 whitespace-nowrap text-blue-600 ">{obj.partcode}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{obj.customername}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{obj.customernumber}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-blue-600">{obj.techname}</td>
 
 
 
@@ -200,6 +202,7 @@ export default function Page() {
         axios.post("/api/part/viewparts",companyname).then((respo) => {
 
             const result = respo.data
+            console.log(result.data)
 
             if (result.flag) {
 
@@ -693,6 +696,8 @@ export default function Page() {
                                                         <td className="px-6 py-4 whitespace-nowrap text-blue-600 ">{obj.partcode}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap">{obj.customername}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap">{obj.customernumber}</td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-blue-600">{obj.techname}</td>
+                                                        
 
 
 
