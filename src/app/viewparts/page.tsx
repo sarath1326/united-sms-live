@@ -564,23 +564,75 @@ export default function Page() {
 
     const filter = (e: any) => {
 
+        const select = e.target.value
 
-
-        if (e.target.value === "ALL") {
+        if (select === "ALL") {
 
             setdata(subdata)
 
-        } else {
+        } else if (select === "iw") {
 
 
-            const filterdata = subdata.filter((obj: any) => obj.warrantystatus === e.target.value)
+            const filterdata = subdata.filter((obj: any) => obj.warrantystatus === "IW")
 
             setdata(filterdata)
 
+        } else if (select === "ow") {
+
+            const filterdata = subdata.filter((obj: any) => obj.warrantystatus === "OW")
+
+            setdata(filterdata)
+
+        } else if (select === "ps") {
+
+            const filterdata = subdata.filter((obj: any) => obj.partsent == true && obj.warrantystatus === "IW")
+
+            console.log("filter data", filterdata)
+
+            setdata(filterdata)
+
+        } else if (select === "pns") {
+
+            const filterdata = subdata.filter((obj: any) => obj.partsent === false && obj.warrantystatus === "IW")
+
+            setdata(filterdata)
+
+        } else if (select === "op") {
+
+            const filterdata = subdata.filter((obj: any) => obj.owpaid === true && obj.warrantystatus === "OW")
+
+            setdata(filterdata)
+
+        } else if (select === "onp") {
+
+            const filterdata = subdata.filter((obj: any) => obj.owpaid === false && obj.warrantystatus === "OW")
+
+            setdata(filterdata)
+
+        } else {
+
+            message.warning("choose any filter option")
         }
 
 
 
+    }
+
+
+    interface PartData {
+        partname: string;
+        partcode: string;
+        customername: string;
+        customernumber: string;
+        warrantystatus: string;
+        company: string;
+        partsent: boolean;
+        techname: string;
+        partsentdate: string;
+        recevingdate: string;
+        owcharge: string;
+        owstatus: boolean;
+        owpaid: boolean;
     }
 
 
@@ -590,32 +642,31 @@ export default function Page() {
             "Part Code ",
             " Customer Name",
             "Customer Number",
-            "Tech Name",
+            "Tech name ",
             "Warranty Status",
             " Company",
             "Receving Date",
-            "Part Sent / Payment",
-            "Delete"],
+            "Ow Ammount",
+            "Ow paid",
+            "partsent"
+        ],
 
         ...data.map(({ partname, partcode, customername, customernumber, warrantystatus, company, partsent,
             techname, partsentdate, recevingdate, owcharge, owstatus, owpaid
 
-        }) => [
-        
-            partname,
-            partcode,
-            customername,
-            customernumber,
-            warrantystatus,
-            company,
-            partsent,
-            techname,
-            partsentdate,
-            recevingdate,
-            owcharge,
-            owstatus,
-            owpaid
+        }: any) => [
 
+                partname,
+                partcode,
+                customername,
+                customernumber,
+                techname,
+                warrantystatus,
+                company,
+                recevingdate,
+                owcharge,
+                owpaid,
+                [partsent, partsentdate]
 
 
             ])
@@ -651,8 +702,12 @@ export default function Page() {
                         <select className='ml-5 border-2 border-black ' name="" onChange={filter} id="">
 
                             <option value=""> Filter </option>
-                            <option value="OW"> OW </option>
-                            <option value="IW"> IW </option>
+                            <option value="ow"> ow </option>
+                            <option value="iw"> iw </option>
+                            <option value="ps"> retuned part </option>
+                            <option value="pns"> not retuned part  </option>
+                            <option value="op"> ow paid  </option>
+                            <option value="onp"> ow no paid  </option>
                             <option value="ALL"> ALL </option>
 
 
@@ -915,9 +970,15 @@ export default function Page() {
 
                                 <div className="">
 
-                                    <span className='text-red-500' > Total Parts :{data.length} </span>
+                                    <span className='text-red-500 mr-5' > Total Parts :{data.length} </span>
 
-                                    <div className='w-full flex justify-center mb-5' >
+                                    <button className='w-[150px] h-[25px] bg-green-600 text-white rounded-md ' >
+
+                                        <CSVLink data={csvData} > export excel  </CSVLink>
+
+                                    </button>
+
+                                    <div className='w-full flex justify-center mb-5 mt-5' >
 
                                         <table className=" bg-white">
 
@@ -957,6 +1018,8 @@ export default function Page() {
                                         </table>
 
                                     </div>
+
+
 
 
 
