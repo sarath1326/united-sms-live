@@ -24,6 +24,8 @@ function Page() {
         "onida",
         "formanty",
         "midea",
+        "bb",
+        "spanio"
 
     ])
 
@@ -166,7 +168,7 @@ function Page() {
 
         <div>
 
-            <div className='w-full h-screen bg-[#E7F0DC] pt-10  ' >
+            <div className='w-full min-h-screen bg-[#E7F0DC] pt-10  ' >
 
                 <Navebar />
 

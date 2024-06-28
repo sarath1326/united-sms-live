@@ -46,6 +46,8 @@ export default function Page() {
         "onida",
         "formanty",
         "midea",
+        "bb",
+        "spanio"
 
     ])
 
@@ -301,7 +303,7 @@ export default function Page() {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, Paid it!"
 
         }).then((result) => {
 
