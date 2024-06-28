@@ -12,6 +12,7 @@ import { ThreeDots } from 'react-loader-spinner'
 import axios from 'axios'
 import { message } from 'antd'
 import Swal from 'sweetalert2'
+import { CSVLink, CSVDownload } from "react-csv"
 
 export default function Page() {
 
@@ -194,12 +195,12 @@ export default function Page() {
 
         setview(false)
 
-        const companyname={
-             
-             name: e.target.value
+        const companyname = {
+
+            name: e.target.value
         }
 
-        axios.post("/api/part/viewparts",companyname).then((respo) => {
+        axios.post("/api/part/viewparts", companyname).then((respo) => {
 
             const result = respo.data
             console.log(result.data)
@@ -225,9 +226,9 @@ export default function Page() {
         }).catch(err => {
 
             setview(true)
-            message.error("Network Error" , err.message)
+            message.error("Network Error", err.message)
 
-            console.log("view error",err)
+            console.log("view error", err)
         })
 
 
@@ -364,12 +365,12 @@ export default function Page() {
 
             setsearch(true)
 
-            const sentdata={
+            const sentdata = {
 
-                 name:input
+                name: input
             }
 
-            axios.post("/api/part/search",sentdata).then((respo) => {
+            axios.post("/api/part/search", sentdata).then((respo) => {
 
                 const result = respo.data
 
@@ -438,13 +439,13 @@ export default function Page() {
                 }).then((result) => {
                     if (result.isConfirmed) {
 
-                      
-                        const sentdata={
 
-                            id:id
+                        const sentdata = {
+
+                            id: id
                         }
 
-                        axios.post("/api/part/partdelete",sentdata).then((respo) => {
+                        axios.post("/api/part/partdelete", sentdata).then((respo) => {
 
                             const result = respo.data
 
@@ -500,47 +501,47 @@ export default function Page() {
                     confirmButtonText: "Yes, delete it!"
                 }).then((result) => {
 
-                    if(result.isConfirmed){
+                    if (result.isConfirmed) {
 
-                        const sentdata={
+                        const sentdata = {
 
-                            id:id
+                            id: id
                         }
 
 
-                        
-                    axios.post("/api/part/partdelete", sentdata).then((respo) => {
 
-                        const result = respo.data
+                        axios.post("/api/part/partdelete", sentdata).then((respo) => {
 
-                        if (result.flag) {
+                            const result = respo.data
 
-                            data.splice(index, 1)
-                            setdata([...data])
+                            if (result.flag) {
 
-                            searchdata.splice(index, 1)
-                            setsearchdata([...searchdata])
+                                data.splice(index, 1)
+                                setdata([...data])
 
-
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            });
+                                searchdata.splice(index, 1)
+                                setsearchdata([...searchdata])
 
 
-                        } else {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
 
-                            message.error("server error")
-                        }
+
+                            } else {
+
+                                message.error("server error")
+                            }
 
 
-                    }).catch(err => {
+                        }).catch(err => {
 
-                        message.error("Network error")
-                    })
+                            message.error("Network error")
+                        })
 
-                         
+
                     }
 
 
@@ -559,16 +560,16 @@ export default function Page() {
     }
 
 
-      // data filter func
+    // data filter func
 
     const filter = (e: any) => {
 
-        
+
 
         if (e.target.value === "ALL") {
 
-         setdata(subdata)
-        
+            setdata(subdata)
+
         } else {
 
 
@@ -581,6 +582,46 @@ export default function Page() {
 
 
     }
+
+
+    const csvData = [
+
+        ["Part Name",
+            "Part Code ",
+            " Customer Name",
+            "Customer Number",
+            "Tech Name",
+            "Warranty Status",
+            " Company",
+            "Receving Date",
+            "Part Sent / Payment",
+            "Delete"],
+
+        ...data.map(({ partname, partcode, customername, customernumber, warrantystatus, company, partsent,
+            techname, partsentdate, recevingdate, owcharge, owstatus, owpaid
+
+        }) => [
+        
+            partname,
+            partcode,
+            customername,
+            customernumber,
+            warrantystatus,
+            company,
+            partsent,
+            techname,
+            partsentdate,
+            recevingdate,
+            owcharge,
+            owstatus,
+            owpaid
+
+
+
+            ])
+
+
+    ]
 
 
 
@@ -697,7 +738,7 @@ export default function Page() {
                                                         <td className="px-6 py-4 whitespace-nowrap">{obj.customername}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap">{obj.customernumber}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-blue-600">{obj.techname}</td>
-                                                        
+
 
 
 
@@ -833,7 +874,7 @@ export default function Page() {
 
                                     <option value=""> Select Company </option>
                                     {
-                                        company.map((obj,index) => (
+                                        company.map((obj, index) => (
 
                                             <option key={index} value={obj}> {obj} </option>
                                         ))
@@ -884,7 +925,7 @@ export default function Page() {
                                                 <tr>
 
                                                     {
-                                                        th.map((obj,index) => (
+                                                        th.map((obj, index) => (
 
                                                             <th key={index} className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
 
