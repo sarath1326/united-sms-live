@@ -6,14 +6,15 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { message } from 'antd';
+import Marquee from "react-fast-marquee";
 
 
 
 
-  function Navebar() {
+function Navebar() {
 
 
-    
+
 
     const router = useRouter()
     const [name, setname] = useState(" ")
@@ -30,9 +31,9 @@ import { message } from 'antd';
                 setname(result.data.name)
 
             } else if (result.err) {
-                
+
                 message.error(result.msg)
-                console.log("nav error",result.msg)
+                console.log("nav error", result.msg)
                 setname(" ")
 
             } else {
@@ -48,37 +49,37 @@ import { message } from 'antd';
         })
     })
 
-    const test=async()=>{
+    const test = async () => {
 
         console.log("req sent")
 
-        const result= await axios("/api/users/test")
+        const result = await axios("/api/users/test")
 
         console.log("axios result :", result.data)
 
-         
+
     }
 
-    const logout=()=>{
+    const logout = () => {
 
-          axios.post("/api/users/logout").then((respo)=>{
+        axios.post("/api/users/logout").then((respo) => {
 
-                    const result=respo.data
+            const result = respo.data
 
-                    if(result.flag){
+            if (result.flag) {
 
-                         message.success("your are Logout")
-                    }else{
+                message.success("your are Logout")
+            } else {
 
 
-                         message.error("server error")
-                    }
-  
-                
-          }).catch(err=>{
+                message.error("server error")
+            }
 
-                message.error("Network Error")
-          })
+
+        }).catch(err => {
+
+            message.error("Network Error")
+        })
     }
 
 
@@ -93,12 +94,12 @@ import { message } from 'antd';
 
                 <div className='w-[50%] h-[100%]  pl-5' >
 
-                  <span className='text-blue-600 font-medium text-[25px] ' > United Service  </span>
+                    <span className='text-blue-600 font-medium text-[25px] ' > United Service  </span>
                     <span onClick={test} className=' text-[25px] text-[#FF204E] ml-5' > SMS </span>
 
 
 
-                    <span onClick={()=>{router.push("/")}} className='text-[15px] font-bold text-black  ml-10 cursor-pointer' > Home  </span>
+                    <span onClick={() => { router.push("/") }} className='text-[15px] font-bold text-black  ml-10 cursor-pointer' > Home  </span>
 
 
                 </div>
@@ -122,7 +123,7 @@ import { message } from 'antd';
 
                             <button onClick={() => { router.push("/login") }} className='w-[80px] h-[35px] bg-white hover:bg-blue-400 hover:text-white bg-white border-2 border-black rounded-md text-black' >
 
-                               Login
+                                Login
 
                             </button>
                     }
@@ -137,9 +138,18 @@ import { message } from 'antd';
 
             </div>
 
-           <div className='w-full h-[1px] bg-black' >
+            <Marquee className='text-red-600 text-[14px]' >
+                   
+                  1) please delete ow paid data or print to excel copy then delete.   2) please delete old iw spare retuned data... thank you...
+                </Marquee>
 
-           </div>
+
+            <div className='w-full h-[1px] bg-black' >
+
+               
+
+
+            </div>
 
 
 

@@ -80,17 +80,17 @@ export default function Page() {
         (
 
 
-            <tr key={index}  >
+            <tr key={index} className='text-[14px]'  >
 
-                <td className=" px-6 py-4 ">{obj.partname}</td>
-                <td className=" px-6 py-4   text-blue-600 ">{obj.partcode}</td>
-                <td className=" px-6 py-4 ">{obj.customername}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{obj.customernumber}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-blue-600">{obj.techname}</td>
+                <td className="px-6 py-1 ">{obj.partname}</td>
+                <td className="px-6 py-1   text-blue-600 ">{obj.partcode}</td>
+                <td className="px-6 py-1 ">{obj.customername}</td>
+                <td className="px-6 py-1">{obj.customernumber}</td>
+                <td className="px-6 py-1">{obj.techname}</td>
 
 
 
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-1">
 
                     {obj.warrantystatus}
 
@@ -98,10 +98,10 @@ export default function Page() {
                 </td>
 
 
-                <td className="px-6 py-4 whitespace-nowrap">{obj.company}</td>
+                <td className="px-6 py-1">{obj.company}</td>
 
 
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-1">
                     {/* <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                         Active
                     </span> */}
@@ -112,7 +112,7 @@ export default function Page() {
                     obj.owstatus ?
 
 
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-1">
                             {obj.owcharge} <br/>
 
                             {
@@ -138,7 +138,7 @@ export default function Page() {
 
                         obj.partsent ?
 
-                            <td className="px-6 py-4 whitespace-nowrap" > <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            <td className="px-6 py-1" > <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
 
                                 returend
 
@@ -152,7 +152,7 @@ export default function Page() {
 
                             :
 
-                            <td className="px-6 py-4 whitespace-nowrap"  >
+                            <td className="px-6 py-1"  >
 
                                 <input onClick={() => { partsent(obj._id) }} type="checkbox" />
 
@@ -735,7 +735,7 @@ export default function Page() {
 
                         // search time result show section
 
-                        <div className='w-full h-[300px] bg-[#E7F0DC] flex justify-center items-center' >
+                        <div className='w-full h-[300px] bg-[#E7F0DC] flex justify-center items-center overflow-x-auto' >
 
                             {
                                 serloding ?
@@ -763,12 +763,12 @@ export default function Page() {
                                     <table className=" bg-white">
 
                                         <thead className="bg-gray-50">
-                                            <tr>
+                                            <tr className='border-[1px] border-gray-500 bg-blue-300'>
 
                                                 {
                                                     th.map((obj, index) => (
 
-                                                        <th key={index} className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
+                                                        <th key={index} className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider"> {obj} </th>
 
 
                                                     ))
@@ -778,7 +778,7 @@ export default function Page() {
                                             </tr>
                                         </thead>
 
-                                        <tbody className="divide-y divide-gray-200">
+                                        <tbody className="divide-y divide-gray-400">
 
 
 
@@ -786,18 +786,18 @@ export default function Page() {
 
                                                 searchdata.map((obj: any, index: any) => (
 
-                                                    <tr key={index}>
+                                                    <tr key={index} className='text-[14px]' >
 
-                                                        <td className="px-6 py-4 whitespace-nowrap">{obj.partname}</td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-blue-600 ">{obj.partcode}</td>
-                                                        <td className="px-6 py-4 whitespace-nowrap">{obj.customername}</td>
-                                                        <td className="px-6 py-4 whitespace-nowrap">{obj.customernumber}</td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-blue-600">{obj.techname}</td>
-
-
+                                                        <td className="px-6 py-1">{obj.partname}</td>
+                                                        <td className="px-6 py-1 text-blue-600 ">{obj.partcode}</td>
+                                                        <td className="px-6 py-1">{obj.customername}</td>
+                                                        <td className="px-6 py-1">{obj.customernumber}</td>
+                                                        <td className="px-6 py-1">{obj.techname}</td>
 
 
-                                                        <td className="px-6 py-4 whitespace-nowrap">
+
+
+                                                        <td className="px-6 py-1">
 
                                                             {obj.warrantystatus}
 
@@ -805,10 +805,10 @@ export default function Page() {
                                                         </td>
 
 
-                                                        <td className="px-6 py-4 whitespace-nowrap">{obj.company}</td>
+                                                        <td className="px-6 py-1">{obj.company}</td>
 
 
-                                                        <td className="px-6 py-4 whitespace-nowrap">
+                                                        <td className="px-6 py-1">
                                                             {/* <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                         Active
                                                     </span> */}
@@ -819,7 +819,7 @@ export default function Page() {
                                                             obj.owstatus ?
 
 
-                                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                                <td className="px-6 py-1">
                                                                     {obj.owcharge}
 
                                                                     {
@@ -845,7 +845,7 @@ export default function Page() {
 
                                                                 obj.partsent ?
 
-                                                                    <td className="px-6 py-4 whitespace-nowrap" > <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                                    <td className="px-6 py-1" > <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
 
                                                                         returend
 
@@ -859,7 +859,7 @@ export default function Page() {
 
                                                                     :
 
-                                                                    <td className="px-6 py-4 whitespace-nowrap"  >
+                                                                    <td className="px-6 py-1"  >
 
                                                                         <input onClick={() => { partsent(obj._id) }} type="checkbox" />
 
@@ -978,17 +978,18 @@ export default function Page() {
 
                                     </button>
 
-                                    <div className='  flex justify-center mb-5 mt-5    ' >
+                                    <div className=' w-full flex justify-center mb-5 mt-5 overflow-x-auto   ' >
 
                                         <table className=" bg-white  ">
 
                                             <thead className="bg-gray-50">
-                                                <tr>
+                                               
+                                                <tr className='border-[1px] border-gray-500 bg-blue-300 ' >
 
                                                     {
                                                         th.map((obj, index) => (
 
-                                                            <th key={index} className=" text-center   text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
+                                                            <th key={index} className=" px-6 py-3 text-center   text-xs font-bold text-black uppercase "> {obj} </th>
 
 
                                                         ))
@@ -999,7 +1000,7 @@ export default function Page() {
                                             </thead>
 
 
-                                            <tbody className="divide-y divide-gray-200">
+                                            <tbody className="divide-y divide-gray-400">
 
 
 
