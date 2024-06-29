@@ -80,11 +80,11 @@ export default function Page() {
         (
 
 
-            <tr key={index} >
+            <tr key={index}  >
 
-                <td className="px-6 py-4 whitespace-nowrap">{obj.partname}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-blue-600 ">{obj.partcode}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{obj.customername}</td>
+                <td className=" px-6 py-4 ">{obj.partname}</td>
+                <td className=" px-6 py-4   text-blue-600 ">{obj.partcode}</td>
+                <td className=" px-6 py-4 ">{obj.customername}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{obj.customernumber}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-blue-600">{obj.techname}</td>
 
@@ -113,7 +113,7 @@ export default function Page() {
 
 
                         <td className="px-6 py-4 whitespace-nowrap">
-                            {obj.owcharge}
+                            {obj.owcharge} <br/>
 
                             {
                                 obj.owpaid ?
@@ -686,7 +686,7 @@ export default function Page() {
     return (
         <div>
 
-            <div className="w-full h-screen bg-[#E7F0DC] pt-10 overflow-scroll sm:overflow-hidden " >
+            <div className="w-full h-screen bg-[#E7F0DC] pt-10  " >
 
                 <Navebar />
 
@@ -978,9 +978,9 @@ export default function Page() {
 
                                     </button>
 
-                                    <div className='w-full flex justify-center mb-5 mt-5' >
+                                    <div className='  flex justify-center mb-5 mt-5    ' >
 
-                                        <table className=" bg-white">
+                                        <table className=" bg-white  ">
 
                                             <thead className="bg-gray-50">
                                                 <tr>
@@ -988,7 +988,7 @@ export default function Page() {
                                                     {
                                                         th.map((obj, index) => (
 
-                                                            <th key={index} className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
+                                                            <th key={index} className=" text-center   text-xs font-bold text-gray-500 uppercase tracking-wider"> {obj} </th>
 
 
                                                         ))
